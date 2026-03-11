@@ -2,12 +2,10 @@ package com.mercadoLibre.register.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.mercadoLibre.register.model.User;
 import com.mercadoLibre.register.service.registerService;
-
 import lombok.AllArgsConstructor;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +23,7 @@ public class registerController {
     @PostMapping
     public ResponseEntity<?> addUserEntity (@RequestBody User user) {
         registerService.addUser(user);
-        ResponseEntity<?> entity = ResponseEntity.ok().body("Usuario registrado ");
+        ResponseEntity<?> entity = ResponseEntity.status(HttpStatus.CREATED).body("usuario creado con exito");
         return entity;
     }
 
