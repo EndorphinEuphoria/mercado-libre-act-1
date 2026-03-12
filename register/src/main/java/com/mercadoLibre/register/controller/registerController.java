@@ -29,9 +29,10 @@ public class registerController {
          if(user.getEmail() == null||user.getEmail().trim().isEmpty()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el email del usuario es requerido");
          }
-          if(user.getPassword() == null||user.getPassword().trim().isEmpty()){
+          if(user.getPassword() == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("la contraseña del usuario es requerida");
           }
+          
         registerService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("usuario creado con exito");
     }
