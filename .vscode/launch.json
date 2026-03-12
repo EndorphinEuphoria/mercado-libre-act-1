@@ -2,11 +2,29 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LoginApiApplication",
+            "request": "launch",
+            "mainClass": "github.login.LoginApiApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-RegisterApplication<register>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.mercadoLibre.register.RegisterApplication",
             "projectName": "register",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=53650 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=register"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LoginApiApplication<login>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "github.login.LoginApiApplication",
+            "projectName": "login",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
