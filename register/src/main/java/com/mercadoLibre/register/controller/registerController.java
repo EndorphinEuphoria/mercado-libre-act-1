@@ -22,13 +22,25 @@ public class registerController {
 
     @PostMapping
     public ResponseEntity<?> addUserEntity (@RequestBody User user) {
+
+        if(user.getName() == null||user.getName().trim().isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el nombre del usuario es requerido");
+        }
+         if(user.getEmail() == null||user.getEmail().trim().isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el email del usuario es requerido");
+         }
+          if(user.getPassword() == null||user.getPassword().trim().isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("la contraseña del usuario es requerida");
+          }
         registerService.addUser(user);
-        ResponseEntity<?> entity = ResponseEntity.status(HttpStatus.CREATED).body("usuario creado con exito");
-        return entity;
+        return ResponseEntity.status(HttpStatus.CREATED).body("usuario creado con exito");
     }
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers () {
+        if(registerService.getUserList().isEmpty()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("no hay usuarios registrados");
+        }
         return ResponseEntity.ok().body(registerService.getUserList());
     }
     

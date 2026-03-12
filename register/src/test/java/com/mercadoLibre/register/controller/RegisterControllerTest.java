@@ -64,6 +64,26 @@ public class RegisterControllerTest {
     } 
 
 
+    @Test
+    void saveUser_returnsBadRequest() throws Exception{
+        User userTest = new User();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String JsonUser = objectMapper.writeValueAsString(userTest);
+
+        mockMvc.perform(post("/api-v1/register").contentType(MediaType.APPLICATION_JSON).content(JsonUser)).andExpect(status().isBadRequest())
+        .andExpect(content().string("el nombre del usuario es requerido"));
+    }
+
+    @Test
+    void getAllUsers_returnsNoContent() throws Exception {
+        
+        when(registerService.getUserList()).thenReturn(Arrays.asList());
+
+        mockMvc.perform(get("/api-v1/register/users")).andExpect(status().isNoContent())
+        .andExpect(content().string("no hay usuarios registrados"));
+    }
+
 
 
 
