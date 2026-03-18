@@ -1,0 +1,11 @@
+version: '3'
+services:
+  register-service:
+    build: ./register
+    ports:
+      - "8081:8081"
+
+  login-service:
+    build: ./login
+    ports:
+      - "8080:8080"
