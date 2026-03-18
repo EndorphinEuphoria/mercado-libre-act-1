@@ -20,7 +20,7 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<String> login(@RequestBody User user) {
-        if (loginService.login(user.getEmail(), user.getPassword())) {
+        if (loginService.login(user)) {
             return ResponseEntity.status(HttpStatus.OK).body("Sesión iniciada con éxito.");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email o contraseña inválidos.");
