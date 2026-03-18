@@ -48,9 +48,8 @@ public class registerController {
         }
     }
 
-    @PostMapping("/login/{email}/{password}")
+    @GetMapping("/login/{email}/{password}")
     public ResponseEntity<?> loginReturnsBoolean(@PathVariable String email,@PathVariable String password) {
-    
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(registerService.loginReturnsB(email, password));
         
     }
