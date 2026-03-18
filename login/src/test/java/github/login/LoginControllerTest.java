@@ -1,5 +1,6 @@
 package github.login;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -35,14 +36,14 @@ public class LoginControllerTest {
 
         User userTest = new User("Test", "test@gmail.com", "123456", Rol.USER);
 
-        when(loginService.login(userTest.getEmail(), userTest.getPassword())).thenReturn(true);
+        when(loginService.login(any(User.class))).thenReturn(true);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String JsonUser = objectMapper.writeValueAsString(userTest);
+        String jsonUser = objectMapper.writeValueAsString(userTest);
 
         mockMvc.perform(post("/api-v1/login")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUser))
+                .content(jsonUser))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Sesión iniciada con éxito."));
     }
@@ -52,14 +53,14 @@ public class LoginControllerTest {
 
         User userTest = new User("Test", "test@gmail.com", "wrongpass", Rol.USER);
 
-        when(loginService.login(userTest.getEmail(), userTest.getPassword())).thenReturn(false);
+        when(loginService.login(any(User.class))).thenReturn(false);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String JsonUser = objectMapper.writeValueAsString(userTest);
+        String jsonUser = objectMapper.writeValueAsString(userTest);
 
         mockMvc.perform(post("/api-v1/login")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUser))
+                .content(jsonUser))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Email o contraseña inválidos."));
     }
