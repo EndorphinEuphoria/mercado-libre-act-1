@@ -17,7 +17,6 @@ public class registerService {
    if(containsUser(user.getEmail())){
       throw new IllegalAccessError("El email ya esta registrado");
    }
-
    if(user.getEmail() == null || user.getEmail().trim().isBlank()){
       throw new IllegalAccessError("El email no puede estar vacío");
    } 

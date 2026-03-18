@@ -1,5 +1,4 @@
 package com.mercadoLibre.register.controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.mercadoLibre.register.model.User;
