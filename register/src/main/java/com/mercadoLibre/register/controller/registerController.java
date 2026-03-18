@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-
-
 @RequestMapping("/api-v1/register")
 @RestController
 @AllArgsConstructor
@@ -50,8 +48,9 @@ public class registerController {
 
     @GetMapping("/login/{email}/{password}")
     public ResponseEntity<?> loginReturnsBoolean(@PathVariable String email,@PathVariable String password) {
+
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(registerService.loginReturnsB(email, password));
-        
+
     }
 
 }
