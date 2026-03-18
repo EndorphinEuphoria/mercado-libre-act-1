@@ -25,8 +25,8 @@ public class LoginService {
     }
 
      public Boolean login(User user) {
-
-        String url = "http://localhost:8081/api-v1/register/login/" + user.getEmail() + "/" + user.getPassword();
+        //cambiar a localhost o register-service
+        String url = "http://register-service:8081/api-v1/register/login/" + user.getEmail() + "/" + user.getPassword();
         Boolean externalAnswer = restTemplate.getForObject(url, Boolean.class);
         return externalAnswer;
     }
