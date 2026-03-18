@@ -1,5 +1,4 @@
 package com.mercadoLibre.register.controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.mercadoLibre.register.model.User;
@@ -10,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -22,19 +23,12 @@ public class registerController {
 
     @PostMapping
     public ResponseEntity<?> addUserEntity (@RequestBody User user) {
-
-        if(user.getName() == null||user.getName().trim().isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el nombre del usuario es requerido");
-        }
-         if(user.getEmail() == null||user.getEmail().trim().isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el email del usuario es requerido");
-         }
-          if(user.getPassword() == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("la contraseña del usuario es requerida");
+          try {
+             registerService.addUser(user);
+             return ResponseEntity.status(HttpStatus.CREATED).body("usuario creado con exito");
+          } catch (IllegalAccessError e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
           }
-          
-        registerService.addUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body("usuario creado con exito");
     }
 
     @GetMapping("/users")
@@ -44,6 +38,17 @@ public class registerController {
         }
         return ResponseEntity.ok().body(registerService.getUserList());
     }
+    
+    @GetMapping("/users/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        try {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(registerService.findUserByEmail(email));
+        } catch (Exception e) {
+           return ResponseEntity.status(HttpStatus.NO_CONTENT).body("no hay usuario con ese email");
+        }
+    }
+
+
     
 
 
