@@ -56,16 +56,12 @@ public boolean containsUser (String email){
 
 public boolean loginReturnsB(String email , String password){
    for(User us: userList){
-      if(email.equals(us.getEmail()) || password.equals(us.getPassword())){
+      if(email.equals(us.getEmail()) && password.equals(us.getPassword())){
          return true;
       }
    }
    return false;
 
 }
-
-
-
-
 
 }
